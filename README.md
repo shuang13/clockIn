@@ -1,14 +1,14 @@
 
-pinan
-报平安打卡
+# pinan
+> 报平安打卡
 
-Build Setup
-# install Node.js
-## install dependencies
+## Build Setup
+
+``` bash
+# install Node.js、Python3
+# install dependencies
 npm install
 
-# install python3
-## install dependencies
 pip install opencv-python
 
 # configuration your account in account.js
@@ -24,6 +24,6 @@ smtp 授权码
 
 # start
 npm start
-
+```
 
 
