@@ -31,12 +31,11 @@ const Daka = async () => {
 			defaultViewport: {'width': 1920, 'height': 1080},
 			executablePath: "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe", 
 			ignoreHTTPSErrors: false, //忽略 https 报错
-			// args: ['--window-size=1,1']  //
+			args: ['--window-size=1920,1080']  //
 		});
 		const page = await browser.newPage(); // 打开一个页面, page就是后序将要操作的  
-	  	await page.setViewport({'width': 1920, 'height': 1080});
 
-		await page.setUserAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.183 Safari/537.36")
+		await page.setUserAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36")
 		// 打开拦截请求
 		await page.setRequestInterception(true);
 		// 请求拦截器
@@ -157,6 +156,8 @@ const Daka = async () => {
 		
 		await newPage.waitFor(2000)
 		console.log(Date()," 打卡成功")	
+		sendMail(`Success Check in at ${new Date().toLocaleString()}`);
+
 		await browser.close();
 		return "success"
 		 
@@ -202,8 +203,7 @@ const main = async () => {
 		console.log("Another Try again")
 		ret = await Daka()
 	}
-	sendMail(`Success Check in at ${new Date().toLocaleString()}`);
 }
-// main()
-Daka()
+main()
+// Daka()
 module.exports = Daka

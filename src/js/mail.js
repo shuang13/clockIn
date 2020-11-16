@@ -1,5 +1,5 @@
 const nodemailer = require("nodemailer");
-const account = require("./account");
+const user = require("./account");
 
 const sendMail = msg => {
   nodemailer.createTestAccount((err, account) => {
@@ -8,23 +8,25 @@ const sendMail = msg => {
       port: 465, // SMTP 端口
       secureConnection: true, // 使用了 SSL
       auth: {
-        user: account.mail,
+        user: user.mail,
         // 这里密码不是qq密码，是你设置的smtp授权码
-        pass: account.smtp
+        pass: user.smtp
       }
     });
     let mailOptions = {
-      from: "Angus<"+account.mail+">", // 发送者
-      to: account.mail, // 接收者
+      from: "Angus<"+user.mail+">", // 发送者
+      to: user.mail, // 接收者
       subject: "打卡提醒", // 主题
       html: msg // html body
     };
+    console.log(mailOptions)
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
-        return console.log(error);
+        return console.log(error,"错误");
       }
       console.log("Message sent: %s", info.messageId);
     });
   });
 };
+
 module.exports = sendMail;
